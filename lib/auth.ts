@@ -4,7 +4,7 @@ import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
-import { prisma } from "@/lib/prisma";
+import { prisma } from "./prisma";
 
 export const auth = betterAuth({
   appName: "GameVault",
@@ -20,17 +20,6 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: false,
-  },
-
-  user: {
-    additionalFields: {
-      role: {
-        type: "string",
-        required: false,
-        defaultValue: "user",
-        input: false,
-      },
-    },
   },
 
   session: {

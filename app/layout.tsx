@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
+import { SessionProvider } from "@/components/auth/session-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
@@ -22,11 +23,8 @@ export const metadata: Metadata = {
     default: "GameVault",
     template: "%s | GameVault",
   },
-  description:
-    "Discover, search, and save your favorite games using the IGDB API.",
-
+  description: "Discover, search, and save your favorite games using the IGDB API.",
   applicationName: "GameVault",
-
   keywords: [
     "GameVault",
     "IGDB",
@@ -35,19 +33,15 @@ export const metadata: Metadata = {
     "Next.js",
     "Video Games",
   ],
-
   authors: [
     {
       name: "IKM Products",
     },
   ],
-
   creator: "IKM Products",
-
   openGraph: {
     title: "GameVault",
-    description:
-      "Discover, browse, and save your favorite games.",
+    description: "Discover, browse, and save your favorite games.",
     siteName: "GameVault",
     type: "website",
   },
@@ -65,14 +59,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="min-h-screen bg-background font-sans antialiased">
-        {children}
+        <SessionProvider>{children}</SessionProvider>
 
-        <Toaster
-          richColors
-          position="top-right"
-          expand
-          closeButton
-        />
+        <Toaster richColors position="top-right" expand closeButton />
       </body>
     </html>
   );

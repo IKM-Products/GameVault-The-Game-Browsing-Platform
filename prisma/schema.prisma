@@ -14,12 +14,15 @@ model User {
   email         String   @unique
   emailVerified Boolean  @default(false)
   image         String?
+  role          String   @default("user")
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   sessions      Session[]
   accounts      Account[]
+
+  @@map("user")
 }
 
 model Session {
@@ -34,10 +37,12 @@ model Session {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
 }
 
 model Account {
-  id                    String    @id @default(cuid())
+  id                    String   @id @default(cuid())
   accountId             String
   providerId            String
   accessToken           String?
@@ -53,6 +58,8 @@ model Account {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("account")
 }
 
 model Verification {
@@ -63,4 +70,6 @@ model Verification {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("verification")
 }
